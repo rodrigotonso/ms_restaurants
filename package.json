@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@automapper/classes": "^8.8.1",
+    "@automapper/nestjs": "^8.8.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^9.0.0",
