@@ -46,5 +46,5 @@ You can use this command
 $ npm run migration:generate -- 'src/database/migrations/customMigrationName'
 
 # Execute a migration
-npm run migration:run
+$ npm run migration:run
 ```

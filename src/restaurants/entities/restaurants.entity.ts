@@ -6,17 +6,17 @@ import { BaseEntity } from '@/common/entities/base.entity';
 @Entity('restaurants')
 export class RestaurantsEntity extends BaseEntity {
   @AutoMap()
-  @Index('idx_name', { unique: true, where: 'name IS NOT NULL' })
-  @Column({ length: 50, default: null })
-  readonly name?: string;
+  @Index('idx_name', { unique: true })
+  @Column({ length: 50 })
+  readonly name!: string;
 
   @AutoMap()
   @Column({ length: 150, default: null, type: 'varchar' })
   readonly location?: string;
 
   @AutoMap()
-  @Column({ length: 300, default: null })
-  readonly image?: string;
+  @Column({ length: 300 })
+  readonly image!: string;
 
   constructor(params: RestaurantsEntity) {
     const childParams: Omit<
