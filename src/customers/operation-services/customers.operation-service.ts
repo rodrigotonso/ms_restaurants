@@ -4,6 +4,7 @@ import { Mapper } from '@automapper/core';
 
 import { CustomersService } from '../services/customers.service';
 import { CustomersEntity } from '../entities/customers.entity';
+import { LoggerService } from '@/logger/services/logger.service';
 import { TypeOrmUtil } from '@/common/utils/typeorm.util';
 
 // dtos
@@ -21,12 +22,18 @@ export class CustomersOperationService {
 
   constructor(
     private customersService: CustomersService,
+    private loggerService: LoggerService,
     private typeOrmUtil: TypeOrmUtil,
     @InjectMapper() private mapper: Mapper,
   ) {}
 
   async create(payload: CustomersBodyDto): Promise<CustomersResponseDto> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'create',
+        payload,
+      });
       const createdEntity = await this.customersService.create({ payload });
       const response = this.mapper.map(
         createdEntity,
@@ -35,12 +42,22 @@ export class CustomersOperationService {
       );
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'create',
+        payload: e,
+      });
       throw e;
     }
   }
 
   async findOne(entity: CustomersEntity): Promise<CustomersResponseDto> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'findOne',
+        payload: entity,
+      });
       const response = this.mapper.map(
         entity,
         CustomersEntity,
@@ -48,6 +65,11 @@ export class CustomersOperationService {
       );
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'findOne',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -56,6 +78,11 @@ export class CustomersOperationService {
     queryParams: CustomersQueryParamsDto,
   ): Promise<PaginationResponseDto<CustomersResponseDto>> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'findAll',
+        payload: queryParams,
+      });
       const { order, page, take, ...others } = queryParams;
       const paginationOptions = new PaginationOptionsDto({ order, page, take });
       const filterOptions = new CustomersFilterOptionsDto(others);
@@ -76,6 +103,11 @@ export class CustomersOperationService {
       );
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'findAll',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -85,6 +117,11 @@ export class CustomersOperationService {
     payload: CustomersBodyUpdateDto,
   ): Promise<CustomersResponseDto> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'update',
+        payload: { ...payload, id },
+      });
       let response: CustomersResponseDto | undefined = undefined;
       const updatedEntity = await this.customersService.update({
         id,
@@ -99,12 +136,22 @@ export class CustomersOperationService {
       }
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'update',
+        payload: e,
+      });
       throw e;
     }
   }
 
   async remove(id: number): Promise<CustomersResponseDto> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'remove',
+        payload: { id },
+      });
       let response: CustomersResponseDto | undefined = undefined;
       const deletedEntity = await this.customersService.remove({ id });
       if (deletedEntity) {
@@ -116,6 +163,11 @@ export class CustomersOperationService {
       }
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'remove',
+        payload: e,
+      });
       throw e;
     }
   }

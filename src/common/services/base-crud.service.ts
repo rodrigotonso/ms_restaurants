@@ -1,5 +1,6 @@
 import { Repository, DeepPartial, FindOptionsOrder } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { LoggerService } from '@/logger/services/logger.service';
 
 import { BaseCrudInterface } from '../interfaces/base-crud/base-crud.interface';
 import { BaseCrudCreateParamsInterface } from '../interfaces/base-crud/base-crud-create-params.interface';
@@ -20,13 +21,20 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
 {
   private name = BaseCrudService.name;
 
-  constructor(private entityRepository: Repository<Entity>) {}
+  constructor(
+    private entityRepository: Repository<Entity>,
+    private logger: LoggerService,
+  ) {}
 
   async create({
     payload,
     relations,
   }: BaseCrudCreateParamsInterface<Entity, EntityBodyDto>): Promise<Entity> {
     try {
+      this.logger.log({
+        className: this.name,
+        method: 'create',
+      });
       const newEntity: Entity = await this.entityRepository.save(
         payload as DeepPartial<Entity>,
       );
@@ -34,6 +42,11 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
       const foundEntity = await this.findOne({ id, relations });
       return foundEntity;
     } catch (e) {
+      this.logger.error({
+        className: this.name,
+        method: 'create',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -47,6 +60,10 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
     BaseCrudFindOneResponseType<Entity>
   > {
     try {
+      this.logger.log({
+        className: this.name,
+        method: 'findOne',
+      });
       const foundEntity = await this.entityRepository.findOne({
         where: { id, ...where },
         relations,
@@ -54,6 +71,11 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
       });
       return foundEntity;
     } catch (e) {
+      this.logger.error({
+        className: this.name,
+        method: 'findOne',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -70,6 +92,10 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
     PaginationResponseDto<Entity>
   > {
     try {
+      this.logger.log({
+        className: this.name,
+        method: 'findAll',
+      });
       const { order, take, page } = paginationOptions;
       const skip = (page - 1) * take;
       const [entities, itemCount] = await this.entityRepository.findAndCount({
@@ -91,6 +117,11 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
 
       return paginationResponse;
     } catch (e) {
+      this.logger.error({
+        className: this.name,
+        method: 'findAll',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -104,6 +135,10 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
     BaseCrudFindOneResponseType<Entity>
   > {
     try {
+      this.logger.log({
+        className: this.name,
+        method: 'update',
+      });
       await this.entityRepository.update(
         {
           id,
@@ -115,6 +150,11 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
 
       return updatedEntity;
     } catch (e) {
+      this.logger.error({
+        className: this.name,
+        method: 'update',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -127,6 +167,10 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
     BaseCrudFindOneResponseType<Entity>
   > {
     try {
+      this.logger.log({
+        className: this.name,
+        method: 'remove',
+      });
       let entityId: number;
 
       if (typeof id === 'number') {
@@ -149,6 +193,11 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
       });
       return deletedEntity;
     } catch (e) {
+      this.logger.error({
+        className: this.name,
+        method: 'remove',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -160,10 +209,19 @@ export class BaseCrudService<Entity extends BaseEntity, EntityBodyDto>
     BaseCrudFindOneResponseType<Entity>
   > {
     try {
+      this.logger.log({
+        className: this.name,
+        method: 'restore',
+      });
       await this.entityRepository.restore(id);
       const restoreEntity = await this.findOne({ id, relations });
       return restoreEntity;
     } catch (e) {
+      this.logger.error({
+        className: this.name,
+        method: 'restore',
+        payload: e,
+      });
       throw e;
     }
   }

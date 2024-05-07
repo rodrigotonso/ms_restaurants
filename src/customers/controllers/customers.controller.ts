@@ -15,6 +15,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ParamsInterceptor } from '@/common/interceptors/params.interceptor';
 import { Property } from '@/common/decorators/property.decorator';
 import { ApiPaginatedResponse } from '@/common/decorators/api-paginated-response.decorator';
+import { LoggerService } from '@/logger/services/logger.service';
 import { CustomersOperationService } from '../operation-services/customers.operation-service';
 import { CustomersEntity } from '../entities/customers.entity';
 
@@ -30,7 +31,12 @@ import { CustomersQueryParamsDto } from '../dtos/customers/customers-query-param
 @ApiTags('customers')
 @Controller('/notification-services/customers')
 export class CustomersController {
-  constructor(private customersOperationService: CustomersOperationService) {}
+  private className = CustomersController.name;
+
+  constructor(
+    private customersOperationService: CustomersOperationService,
+    private readonly loggerService: LoggerService,
+  ) {}
 
   @ApiOperation({ summary: 'create' })
   @Version('1')
@@ -40,9 +46,19 @@ export class CustomersController {
     payload: CustomersBodyDto,
   ): Promise<CustomersResponseDto> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'createCostumer',
+        payload,
+      });
       const response = await this.customersOperationService.create(payload);
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'createCostumer',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -58,9 +74,19 @@ export class CustomersController {
     { entity }: BaseFindOnePropertyDto<CustomersEntity>,
   ): Promise<CustomersResponseDto> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'findOneCostumer',
+        payload: entity,
+      });
       const response = await this.customersOperationService.findOne(entity);
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'findOneCostumer',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -73,11 +99,21 @@ export class CustomersController {
     @Query() queryParams: CustomersQueryParamsDto,
   ): Promise<PaginationResponseDto<CustomersResponseDto>> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'findAllCostumer',
+        payload: queryParams,
+      });
       const response = await this.customersOperationService.findAll(
         queryParams,
       );
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'findAllCostumer',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -91,9 +127,19 @@ export class CustomersController {
     payload: CustomersBodyUpdateDto,
   ): Promise<CustomersResponseDto> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'updateCostumer',
+        payload: { ...payload, id },
+      });
       const response = await this.customersOperationService.update(id, payload);
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'updateCostumer',
+        payload: e,
+      });
       throw e;
     }
   }
@@ -103,9 +149,19 @@ export class CustomersController {
   @Delete(':id')
   async remove(@Param() { id }: BaseIdParamDto): Promise<CustomersResponseDto> {
     try {
+      this.loggerService.log({
+        className: this.className,
+        method: 'removeCostumer',
+        payload: { id },
+      });
       const response = await this.customersOperationService.remove(id);
       return response;
     } catch (e) {
+      this.loggerService.error({
+        className: this.className,
+        method: 'removeCostumer',
+        payload: e,
+      });
       throw e;
     }
   }
