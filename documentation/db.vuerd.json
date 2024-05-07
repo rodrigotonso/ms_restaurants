@@ -94,6 +94,52 @@
             }
           },
           {
+            "id": "f0128377-3413-4315-a080-c1764a844225",
+            "name": "location",
+            "comment": "",
+            "dataType": "MEDIUMTEXT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 87.94091796875,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "c8171d97-a2b0-483f-bf0c-c38fce5f10c6",
+            "name": "image",
+            "comment": "",
+            "dataType": "TEXT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
             "id": "2ccb7cb7-6754-4df8-83cd-5a91be62fa53",
             "name": "created_at",
             "comment": "",
@@ -164,10 +210,10 @@
           }
         ],
         "ui": {
-          "active": false,
-          "left": 173,
+          "active": true,
+          "left": 167,
           "top": 43,
-          "zIndex": 309,
+          "zIndex": 13,
           "widthName": 67.03173828125,
           "widthComment": 60
         },
@@ -367,7 +413,7 @@
           "active": false,
           "left": 162,
           "top": 385,
-          "zIndex": 255,
+          "zIndex": 1,
           "widthName": 60,
           "widthComment": 60
         },
@@ -567,7 +613,7 @@
           "active": false,
           "left": 1208,
           "top": 438,
-          "zIndex": 278,
+          "zIndex": 2,
           "widthName": 61.9599609375,
           "widthComment": 60
         },
@@ -744,7 +790,7 @@
           "active": false,
           "left": 655,
           "top": 124,
-          "zIndex": 285,
+          "zIndex": 3,
           "widthName": 103.892578125,
           "widthComment": 60
         },
@@ -944,7 +990,7 @@
           "active": false,
           "left": 688,
           "top": 439,
-          "zIndex": 307,
+          "zIndex": 4,
           "widthName": 72.80810546875,
           "widthComment": 60
         },
@@ -968,8 +1014,8 @@
           "columnIds": [
             "916223a3-9e38-4a28-9d6d-359810f02bc0"
           ],
-          "x": 358.47021484375,
-          "y": 214.5,
+          "x": 358.002197265625,
+          "y": 255.5,
           "direction": "bottom"
         },
         "end": {
