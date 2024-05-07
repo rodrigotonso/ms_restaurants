@@ -6,7 +6,7 @@ import { BaseEntity } from '@/common/entities/base.entity';
 @Entity('tables')
 export class TablesEntity extends BaseEntity {
   @AutoMap()
-  @Column({ name: 'restaurant_id', type: 'integer', default: null })
+  @Column({ name: 'restaurant_id', type: 'integer' })
   readonly restaurantId!: number;
 
   @AutoMap()

@@ -213,7 +213,7 @@
           "active": false,
           "left": 167,
           "top": 43,
-          "zIndex": 5,
+          "zIndex": 4,
           "widthName": 67.03173828125,
           "widthComment": 60
         },
@@ -433,10 +433,10 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 162,
           "top": 385,
-          "zIndex": 23,
+          "zIndex": 5,
           "widthName": 60,
           "widthComment": 60
         },
@@ -636,7 +636,7 @@
           "active": false,
           "left": 1208,
           "top": 438,
-          "zIndex": 2,
+          "zIndex": 1,
           "widthName": 61.9599609375,
           "widthComment": 60
         },
@@ -644,7 +644,7 @@
       },
       {
         "id": "2d24561b-3ccc-4ed9-a021-29e2dd25f90e",
-        "name": "tables_availability",
+        "name": "table_availability",
         "comment": "",
         "columns": [
           {
@@ -813,8 +813,8 @@
           "active": false,
           "left": 655,
           "top": 124,
-          "zIndex": 3,
-          "widthName": 103.892578125,
+          "zIndex": 18,
+          "widthName": 97.392578125,
           "widthComment": 60
         },
         "visible": true
@@ -872,7 +872,7 @@
           },
           {
             "id": "e7834ef8-a552-4a23-a257-6e16163f972f",
-            "name": "reservation_id",
+            "name": "customer_id",
             "comment": "",
             "dataType": "INT",
             "default": "",
@@ -887,7 +887,7 @@
               "pk": false,
               "fk": true,
               "pfk": false,
-              "widthName": 83.65625,
+              "widthName": 72.80810546875,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -1013,7 +1013,7 @@
           "active": false,
           "left": 688,
           "top": 439,
-          "zIndex": 4,
+          "zIndex": 25,
           "widthName": 72.80810546875,
           "widthComment": 60
         },
@@ -1124,7 +1124,7 @@
           "columnIds": [
             "e7834ef8-a552-4a23-a257-6e16163f972f"
           ],
-          "x": 1075.533203125,
+          "x": 1066.875,
           "y": 555.5,
           "direction": "right"
         },
