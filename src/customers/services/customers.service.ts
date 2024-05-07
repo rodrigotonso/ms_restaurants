@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { BaseCrudService } from '@/common/services/base-crud.service';
 import { CustomersEntity } from '../entities/customers.entity';
 import { CustomersBodyDto } from '../dtos/customers/customers-body.dto';
+import { LoggerService } from '@/logger/services/logger.service';
 
 @Injectable()
 export class CustomersService extends BaseCrudService<
@@ -16,7 +17,8 @@ export class CustomersService extends BaseCrudService<
   constructor(
     @InjectRepository(CustomersEntity)
     private customersRepository: Repository<CustomersEntity>,
+    private loggerService: LoggerService,
   ) {
-    super(customersRepository);
+    super(customersRepository, loggerService);
   }
 }
