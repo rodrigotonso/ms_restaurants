@@ -22,15 +22,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Read documentation
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
+You need a pluggin to read .vuerd.json files, we recomended:
+[ERD Editor](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode)
