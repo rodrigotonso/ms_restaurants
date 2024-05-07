@@ -26,3 +26,25 @@ $ npm run start:prod
 
 You need a pluggin to read .vuerd.json files, we recomended:
 [ERD Editor](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode)
+
+## Use Local DB
+
+You need create a .env file, you can copy .env.sample and use that value.
+After that need to use [Docker-Compose](https://docs.docker.com/compose/) and run
+
+```bash
+# You can escape use ctrl+C (cmd+C)
+$ docker-compose up
+```
+
+## Use Migrations
+
+You can use this command
+
+```bash
+# Create a new migration
+$ npm run migration:generate -- 'src/database/migrations/customMigrationName'
+
+# Execute a migration
+npm run migration:run
+```
