@@ -29,7 +29,7 @@ import { CustomersResponseDto } from '../dtos/customers/customers-response.dto';
 import { CustomersQueryParamsDto } from '../dtos/customers/customers-query-params.dto';
 
 @ApiTags('customers')
-@Controller('/notification-services/customers')
+@Controller('/customers-services/customers')
 export class CustomersController {
   private className = CustomersController.name;
 

@@ -22,6 +22,11 @@ import { RestaurantsService } from './services/restaurants.service';
 import { TableAvailabilityService } from './services/table-availability.service';
 import { TablesService } from './services/tables.service';
 
+import { ReservationsMapper } from './mappers/table-availability.mapper';
+import { RestaurantsMapper } from './mappers/restaurants.mapper';
+import { TableAvailabilityMapper } from './mappers/reservations.mapper';
+import { TablesMapper } from './mappers/tables.mapper';
+
 import { TypeOrmUtil } from '@/common/utils/typeorm.util';
 
 @Module({
@@ -48,6 +53,10 @@ import { TypeOrmUtil } from '@/common/utils/typeorm.util';
     RestaurantsService,
     TableAvailabilityService,
     TablesService,
+    ReservationsMapper,
+    RestaurantsMapper,
+    TableAvailabilityMapper,
+    TablesMapper,
     TypeOrmUtil,
   ],
 })

@@ -29,7 +29,7 @@ import { TableAvailabilityResponseDto } from '../../dtos/table-availability/tabl
 import { TableAvailabilityQueryParamsDto } from '../../dtos/table-availability/table-availability-query-params.dto';
 
 @ApiTags('tableAvailability')
-@Controller('/notification-services/tableAvailability')
+@Controller('/availability-services/tableAvailability')
 export class TableAvailabilityController {
   private className = TableAvailabilityController.name;
 
@@ -48,7 +48,7 @@ export class TableAvailabilityController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'createCostumer',
+        method: 'createTableAvailability',
         payload,
       });
       const response = await this.tableAvailabilityOperationService.create(
@@ -58,7 +58,7 @@ export class TableAvailabilityController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'createCostumer',
+        method: 'createTableAvailability',
         payload: e,
       });
       throw e;
@@ -78,7 +78,7 @@ export class TableAvailabilityController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'findOneCostumer',
+        method: 'findOneTableAvailability',
         payload: entity,
       });
       const response = await this.tableAvailabilityOperationService.findOne(
@@ -88,7 +88,7 @@ export class TableAvailabilityController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'findOneCostumer',
+        method: 'findOneTableAvailability',
         payload: e,
       });
       throw e;
@@ -105,7 +105,7 @@ export class TableAvailabilityController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'findAllCostumer',
+        method: 'findAllTableAvailability',
         payload: queryParams,
       });
       const response = await this.tableAvailabilityOperationService.findAll(
@@ -115,7 +115,7 @@ export class TableAvailabilityController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'findAllCostumer',
+        method: 'findAllTableAvailability',
         payload: e,
       });
       throw e;
@@ -133,7 +133,7 @@ export class TableAvailabilityController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'updateCostumer',
+        method: 'updateTableAvailability',
         payload: { ...payload, id },
       });
       const response = await this.tableAvailabilityOperationService.update(
@@ -144,7 +144,7 @@ export class TableAvailabilityController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'updateCostumer',
+        method: 'updateTableAvailability',
         payload: e,
       });
       throw e;
@@ -160,7 +160,7 @@ export class TableAvailabilityController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'removeCostumer',
+        method: 'removeTableAvailability',
         payload: { id },
       });
       const response = await this.tableAvailabilityOperationService.remove(id);
@@ -168,7 +168,7 @@ export class TableAvailabilityController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'removeCostumer',
+        method: 'removeTableAvailability',
         payload: e,
       });
       throw e;

@@ -36,8 +36,8 @@ export default registerAs('loggerOptions', () => {
     format: format.combine(
       format.uncolorize(),
       format.timestamp(),
-      format.printf(({ level, message, context, timestamp }) => {
-        return `${timestamp} [${context}] ${level}: ${message}`;
+      format.printf(({ level, message, timestamp }) => {
+        return `${timestamp} ${level}: ${message}`;
       }),
     ),
   };

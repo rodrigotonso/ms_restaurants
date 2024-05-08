@@ -29,7 +29,7 @@ import { RestaurantsResponseDto } from '../../dtos/restaurants/restaurants-respo
 import { RestaurantsQueryParamsDto } from '../../dtos/restaurants/restaurants-query-params.dto';
 
 @ApiTags('restaurants')
-@Controller('/notification-services/restaurants')
+@Controller('/restaurants-services/restaurants')
 export class RestaurantsController {
   private className = RestaurantsController.name;
 
@@ -48,7 +48,7 @@ export class RestaurantsController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'createCostumer',
+        method: 'createRestaurant',
         payload,
       });
       const response = await this.restaurantsOperationService.create(payload);
@@ -56,7 +56,7 @@ export class RestaurantsController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'createCostumer',
+        method: 'createRestaurant',
         payload: e,
       });
       throw e;
@@ -76,7 +76,7 @@ export class RestaurantsController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'findOneCostumer',
+        method: 'findOneRestaurant',
         payload: entity,
       });
       const response = await this.restaurantsOperationService.findOne(entity);
@@ -84,7 +84,7 @@ export class RestaurantsController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'findOneCostumer',
+        method: 'findOneRestaurant',
         payload: e,
       });
       throw e;
@@ -101,7 +101,7 @@ export class RestaurantsController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'findAllCostumer',
+        method: 'findAllRestaurant',
         payload: queryParams,
       });
       const response = await this.restaurantsOperationService.findAll(
@@ -111,7 +111,7 @@ export class RestaurantsController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'findAllCostumer',
+        method: 'findAllRestaurant',
         payload: e,
       });
       throw e;
@@ -129,7 +129,7 @@ export class RestaurantsController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'updateCostumer',
+        method: 'updateRestaurant',
         payload: { ...payload, id },
       });
       const response = await this.restaurantsOperationService.update(
@@ -140,7 +140,7 @@ export class RestaurantsController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'updateCostumer',
+        method: 'updateRestaurant',
         payload: e,
       });
       throw e;
@@ -156,7 +156,7 @@ export class RestaurantsController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'removeCostumer',
+        method: 'removeRestaurant',
         payload: { id },
       });
       const response = await this.restaurantsOperationService.remove(id);
@@ -164,7 +164,7 @@ export class RestaurantsController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'removeCostumer',
+        method: 'removeRestaurant',
         payload: e,
       });
       throw e;

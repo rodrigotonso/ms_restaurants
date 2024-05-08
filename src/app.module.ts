@@ -12,7 +12,12 @@ import { RestaurantsModule } from './restaurants/restaurants.module';
 @Module({
   imports: [
     AutomapperModule.forRoot({ strategyInitializer: classes() }),
-    ConfigModule.forRoot({ load: [config], isGlobal: true, validationSchema }),
+    ConfigModule.forRoot({
+      load: [config],
+      isGlobal: true,
+      validationSchema,
+      envFilePath: '.env',
+    }),
     CustomersModule,
     DatabaseModule,
     LoggerModule,

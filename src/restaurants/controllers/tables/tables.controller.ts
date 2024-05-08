@@ -29,7 +29,7 @@ import { TablesResponseDto } from '../../dtos/tables/tables-response.dto';
 import { TablesQueryParamsDto } from '../../dtos/tables/tables-query-params.dto';
 
 @ApiTags('tables')
-@Controller('/notification-services/tables')
+@Controller('/tables-services/tables')
 export class TablesController {
   private className = TablesController.name;
 
@@ -48,7 +48,7 @@ export class TablesController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'createCostumer',
+        method: 'createTable',
         payload,
       });
       const response = await this.tablesOperationService.create(payload);
@@ -56,7 +56,7 @@ export class TablesController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'createCostumer',
+        method: 'createTable',
         payload: e,
       });
       throw e;
@@ -76,7 +76,7 @@ export class TablesController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'findOneCostumer',
+        method: 'findOneTable',
         payload: entity,
       });
       const response = await this.tablesOperationService.findOne(entity);
@@ -84,7 +84,7 @@ export class TablesController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'findOneCostumer',
+        method: 'findOneTable',
         payload: e,
       });
       throw e;
@@ -101,7 +101,7 @@ export class TablesController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'findAllCostumer',
+        method: 'findAllTable',
         payload: queryParams,
       });
       const response = await this.tablesOperationService.findAll(queryParams);
@@ -109,7 +109,7 @@ export class TablesController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'findAllCostumer',
+        method: 'findAllTable',
         payload: e,
       });
       throw e;
@@ -127,7 +127,7 @@ export class TablesController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'updateCostumer',
+        method: 'updateTable',
         payload: { ...payload, id },
       });
       const response = await this.tablesOperationService.update(id, payload);
@@ -135,7 +135,7 @@ export class TablesController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'updateCostumer',
+        method: 'updateTable',
         payload: e,
       });
       throw e;
@@ -149,7 +149,7 @@ export class TablesController {
     try {
       this.loggerService.log({
         className: this.className,
-        method: 'removeCostumer',
+        method: 'removeTable',
         payload: { id },
       });
       const response = await this.tablesOperationService.remove(id);
@@ -157,7 +157,7 @@ export class TablesController {
     } catch (e) {
       this.loggerService.error({
         className: this.className,
-        method: 'removeCostumer',
+        method: 'removeTable',
         payload: e,
       });
       throw e;
