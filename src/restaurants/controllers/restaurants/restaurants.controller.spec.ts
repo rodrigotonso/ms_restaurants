@@ -3,22 +3,22 @@ import { ConfigModule } from '@nestjs/config';
 
 import config from '@/common/config/env.config';
 import { validationSchema } from '@/common/config/env.validation-schema';
-import { ReservationsController } from './reservations.controller';
-import { ReservationsOperationService } from '../operation-services/reservations.operation-service';
+import { RestaurantsController } from './restaurants.controller';
+import { RestaurantsOperationService } from '../../operation-services/restaurants.operation-service';
 import { LoggerService } from '@/logger/services/logger.service';
 import { PaginationOptionsDto } from '@/common/dtos/pagination-options.dto';
 import { PaginationMetaDto } from '@/common/dtos/pagination-meta.dto';
 import { PaginationResponseDto } from '@/common/dtos/pagination-response.dto';
 import { Order } from '@/common/consts/order.const';
-import { ReservationsService } from '../services/reservations.service';
-import { ReservationsResponseDto } from '../dtos/reservations/reservations-response.dto';
-import { ReservationsBodyDto } from '../dtos/reservations/reservations-body.dto';
-import { ReservationsEntity } from '../entities/reservations.entity';
+import { RestaurantsService } from '../../services/restaurants.service';
+import { RestaurantsResponseDto } from '../../dtos/restaurants/restaurants-response.dto';
+import { RestaurantsBodyDto } from '../../dtos/restaurants/restaurants-body.dto';
+import { RestaurantsEntity } from '../../entities/restaurants.entity';
 import { BaseFindOnePropertyDto } from '@/common/dtos/base-find-one-property.dto';
 
-describe('ReservationsController', () => {
-  let controller: ReservationsController;
-  let reservationsOperationService: ReservationsOperationService;
+describe('RestaurantsController', () => {
+  let controller: RestaurantsController;
+  let restaurantsOperationService: RestaurantsOperationService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -31,10 +31,10 @@ describe('ReservationsController', () => {
           validationSchema,
         }),
       ],
-      controllers: [ReservationsController],
+      controllers: [RestaurantsController],
       providers: [
         {
-          provide: ReservationsOperationService,
+          provide: RestaurantsOperationService,
           useFactory: () => ({
             create: jest.fn(),
             findOne: jest.fn(),
@@ -53,18 +53,18 @@ describe('ReservationsController', () => {
           }),
         },
         {
-          provide: ReservationsService,
+          provide: RestaurantsService,
           useFactory: () => ({
-            getPreapprovalReservations: jest.fn(),
+            getPreapprovalRestaurants: jest.fn(),
           }),
         },
       ],
     }).compile();
 
-    controller = module.get<ReservationsController>(ReservationsController);
+    controller = module.get<RestaurantsController>(RestaurantsController);
 
-    reservationsOperationService = module.get<ReservationsOperationService>(
-      ReservationsOperationService,
+    restaurantsOperationService = module.get<RestaurantsOperationService>(
+      RestaurantsOperationService,
     );
   });
 
@@ -72,47 +72,49 @@ describe('ReservationsController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('test crud reservations controller', () => {
-    const RESERVATION_MOCK_DATA = {
+  describe('test crud restaurants controller', () => {
+    const RESTAURANT_MOCK_DATA = {
       id: 1,
-      tableId: 1,
-      customerId: 1,
-      date: new Date(),
+      name: 'Italian Food',
+      location: 'Walker 1211',
+      image:
+        'https://img.freepik.com/free-photo/happy-waiter-serving-food-group-cheerful-friends-pub_637285-12525.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
       deletedAt: new Date(),
     };
-    const MOCK_RESERVATION = new ReservationsResponseDto(RESERVATION_MOCK_DATA);
+    const MOCK_RESTAURANT = new RestaurantsResponseDto(RESTAURANT_MOCK_DATA);
 
-    it('should create reservations when execute create function ', async () => {
+    it('should create restaurants when execute create function ', async () => {
       jest
-        .spyOn(reservationsOperationService, 'create')
-        .mockImplementation(() => Promise.resolve(MOCK_RESERVATION));
+        .spyOn(restaurantsOperationService, 'create')
+        .mockImplementation(() => Promise.resolve(MOCK_RESTAURANT));
       const response = await controller.create({
-        tableId: 1,
-        customerId: 1,
-        date: new Date(),
-      } as ReservationsBodyDto);
+        name: 'Italian Food',
+        location: 'Walker 1211',
+        image:
+          'https://img.freepik.com/free-photo/happy-waiter-serving-food-group-cheerful-friends-pub_637285-12525.jpg',
+      } as RestaurantsBodyDto);
       expect(response.id).toEqual(response.id);
     });
 
-    it('should return one reservations when execute findOne function ', async () => {
+    it('should return one restaurants when execute findOne function ', async () => {
       jest
-        .spyOn(reservationsOperationService, 'findOne')
-        .mockImplementation(() => Promise.resolve(MOCK_RESERVATION));
+        .spyOn(restaurantsOperationService, 'findOne')
+        .mockImplementation(() => Promise.resolve(MOCK_RESTAURANT));
 
-      const findOneParams: BaseFindOnePropertyDto<ReservationsEntity> = {
-        id: MOCK_RESERVATION.id,
-        entity: new ReservationsEntity(MOCK_RESERVATION),
+      const findOneParams: BaseFindOnePropertyDto<RestaurantsEntity> = {
+        id: MOCK_RESTAURANT.id,
+        entity: new RestaurantsEntity(MOCK_RESTAURANT),
       };
       const response = await controller.findOne(
-        { id: MOCK_RESERVATION.id },
+        { id: MOCK_RESTAURANT.id },
         findOneParams,
       );
       expect(response.id).toEqual(response.id);
     });
 
-    it('should return one reservations when execute findAll function ', async () => {
+    it('should return one restaurants when execute findAll function ', async () => {
       const MOCK_PAGINATION_OPTIONS = new PaginationOptionsDto({
         order: Order.ASC,
         page: 1,
@@ -123,11 +125,11 @@ describe('ReservationsController', () => {
         itemCount: 1,
       });
       const MOCK_PAGINATION_RESPONSE = new PaginationResponseDto(
-        [MOCK_RESERVATION],
+        [MOCK_RESTAURANT],
         MOCK_PAGINATION_META,
       );
       jest
-        .spyOn(reservationsOperationService, 'findAll')
+        .spyOn(restaurantsOperationService, 'findAll')
         .mockImplementation(() => Promise.resolve(MOCK_PAGINATION_RESPONSE));
       const response = await controller.findAll(MOCK_PAGINATION_OPTIONS);
       expect(response).toEqual(MOCK_PAGINATION_RESPONSE);
