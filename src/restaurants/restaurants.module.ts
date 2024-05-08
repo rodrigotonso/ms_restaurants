@@ -9,12 +9,18 @@ import { TableAvailabilityEntity } from './entities/table-availability.entity';
 
 import { ReservationsController } from './controllers/reservations/reservations.controller';
 import { RestaurantsController } from './controllers/restaurants/restaurants.controller';
+import { TableAvailabilityController } from './controllers/table-availability/table-availability.controller';
+import { TablesController } from './controllers/tables/tables.controller';
 
 import { ReservationsOperationService } from './operation-services/reservations.operation-service';
 import { RestaurantsOperationService } from './operation-services/restaurants.operation-service';
+import { TableAvailabilityOperationService } from './operation-services/table-availability.operation-service';
+import { TablesOperationService } from './operation-services/tables.operation-service';
 
 import { ReservationsService } from './services/reservations.service';
 import { RestaurantsService } from './services/restaurants.service';
+import { TableAvailabilityService } from './services/table-availability.service';
+import { TablesService } from './services/tables.service';
 
 import { TypeOrmUtil } from '@/common/utils/typeorm.util';
 
@@ -27,12 +33,21 @@ import { TypeOrmUtil } from '@/common/utils/typeorm.util';
       TableAvailabilityEntity,
     ]),
   ],
-  controllers: [ReservationsController, RestaurantsController],
+  controllers: [
+    ReservationsController,
+    RestaurantsController,
+    TableAvailabilityController,
+    TablesController,
+  ],
   providers: [
     ReservationsOperationService,
     RestaurantsOperationService,
+    TableAvailabilityOperationService,
+    TablesOperationService,
     ReservationsService,
     RestaurantsService,
+    TableAvailabilityService,
+    TablesService,
     TypeOrmUtil,
   ],
 })
