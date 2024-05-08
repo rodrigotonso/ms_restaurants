@@ -48,3 +48,10 @@ $ npm run migration:generate -- 'src/database/migrations/customMigrationName'
 # Execute a migration
 $ npm run migration:run
 ```
+
+## ToDo:
+
+- Pipes: We need validated de body, params, etc.
+- More tests: We only have test in controllers
+- CI/CD: We need create the pipe, run tests, check migrations, check build, build and deploy
+- **Guards**: We need authentication in the endpoints
