@@ -7,6 +7,7 @@ import { validationSchema } from './common/config/env.validation-schema';
 
 import { CustomersModule } from './customers/customers.module';
 import { DatabaseModule } from './database/database.module';
+import { LoggerModule } from './logger/logger.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { RestaurantsModule } from './restaurants/restaurants.module';
     ConfigModule.forRoot({ load: [config], isGlobal: true, validationSchema }),
     CustomersModule,
     DatabaseModule,
+    LoggerModule,
     RestaurantsModule,
   ],
   controllers: [],
