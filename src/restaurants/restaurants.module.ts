@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReservationsEntity } from './entities/reservations.entity';
 import { RestaurantsEntity } from './entities/restaurants.entity';
 import { TablesEntity } from './entities/tables.entity';
-import { TableAvailabilityEntity } from './entities/table_availability.entity';
+import { TableAvailabilityEntity } from './entities/table-availability.entity';
 
 import { ReservationsController } from './controllers/reservations/reservations.controller';
 import { RestaurantsController } from './controllers/restaurants/restaurants.controller';
